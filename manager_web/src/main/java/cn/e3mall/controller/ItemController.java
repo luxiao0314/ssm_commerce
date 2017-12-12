@@ -11,6 +11,7 @@ import java.util.List;
 import cn.e3mall.common.pojo.EasyUIDataGridResult;
 import cn.e3mall.common.pojo.EasyUITreeNode;
 import cn.e3mall.common.pojo.Msg;
+import cn.e3mall.pojo.TbItem;
 import cn.e3mall.service.ItemService;
 
 /**
@@ -53,7 +54,7 @@ public class ItemController {
      */
     @RequestMapping("/item/cat/list")
     @ResponseBody
-    public List<EasyUITreeNode> getItemCarList(@RequestParam(name = "id",defaultValue = "0") long parentId) {
+    public List<EasyUITreeNode> getItemCarList(@RequestParam(name = "id", defaultValue = "0") long parentId) {
 //        return Msg.success().add("carlist", itemService.getItemCatListByParentId(parentId));
         return itemService.getItemCatListByParentId(parentId);
     }
@@ -92,7 +93,7 @@ public class ItemController {
 
     @RequestMapping("/rest/item/delete")
     @ResponseBody
-    public E3Result deleteItem(@RequestParam(name = "ids",defaultValue = "0") long id) {
+    public E3Result deleteItem(@RequestParam(name = "ids", defaultValue = "0") long id) {
         return itemService.deleteItem(id);
     }
 

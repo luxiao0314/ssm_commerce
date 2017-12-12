@@ -3,6 +3,7 @@ package cn.e3mall.service.impl;
 import cn.e3mall.common.utils.E3Result;
 import cn.e3mall.common.utils.IDUtils;
 import cn.e3mall.mapper.TbItemDescMapper;
+import cn.e3mall.mapper.TbItemParamMapper;
 import cn.e3mall.pojo.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -42,6 +43,8 @@ public class ItemServiceImpl implements ItemService {
     private TbItemCatMapper itemCatMapper;
     @Autowired
     private TbItemMapper itemMapper;
+    @Autowired
+    private TbItemParamMapper itemParamMapper;
     //    @Autowired
 //    private TbItemDescMapper itemDescMapper;
 //    @Autowired
