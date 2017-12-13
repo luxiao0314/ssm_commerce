@@ -1,17 +1,18 @@
-package cn.e3mall.controller;
-
-import cn.e3mall.common.utils.E3Result;
+package cn.e3mall.portal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 import cn.e3mall.common.pojo.EasyUIDataGridResult;
 import cn.e3mall.common.pojo.EasyUITreeNode;
 import cn.e3mall.common.pojo.Msg;
-import cn.e3mall.pojo.TbItem;
+import cn.e3mall.common.utils.E3Result;
 import cn.e3mall.service.ItemService;
 
 /**

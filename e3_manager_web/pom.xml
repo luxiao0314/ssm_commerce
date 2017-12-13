@@ -5,11 +5,12 @@
         <artifactId>common-parent</artifactId>
         <groupId>cn.e3mall</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../common_parent/pom.xml</relativePath>
     </parent>
-    <artifactId>manager_web</artifactId>
+    <artifactId>e3_manager_web</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>manager_web Maven Webapp</name>
+    <name>e3-portal-web Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
@@ -89,10 +90,18 @@
             <groupId>com.github.sgroschupf</groupId>
             <artifactId>zkclient</artifactId>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <!-- 文件上传组件 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
     </dependencies>
     <!-- 配置tomcat插件 -->
     <build>
-        <finalName>manager_web</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>

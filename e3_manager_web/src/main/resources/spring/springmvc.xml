@@ -19,8 +19,15 @@
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    <!-- 配置资源映射 -->
+    <mvc:resources location="/css/" mapping="/css/**"/>
+    <mvc:resources location="/js/" mapping="/js/**"/>
+
     <!-- 引用dubbo服务 -->
     <dubbo:application name="e3-portal-web"/>
-    <dubbo:registry protocol="zookeeper" address="192.168.25.160:2181"/>
+    <dubbo:registry protocol="zookeeper" address="127.0.0.1:2181"/>
     <dubbo:reference interface="cn.e3mall.content.service.ContentService" id="contentService"/>
+    <dubbo:reference interface="cn.e3mall.service.ItemService" id="itemService" />
+    <dubbo:reference interface="cn.e3mall.service.ItemParamsService" id="itemParamsService" />
+    <dubbo:reference interface="cn.e3mall.content.service.ContentCategoryService" id="contentCategoryService" />
 </beans>
