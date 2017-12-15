@@ -40,18 +40,18 @@ public class PictureController {
         UploadManager uploadManager = new UploadManager();
         try {
             //调用put方法上传
-            Response res = uploadManager.put(uploadFile.getBytes(), null, getUpToken());
+            Response res = uploadManager.put(uploadFile.getBytes(), uploadFile.getOriginalFilename(), getUpToken());
             //解析上传成功的结果
             DefaultPutRet putRet = new Gson().fromJson(res.bodyString(), DefaultPutRet.class);
             String url = "http://p0zh7foee.bkt.clouddn.com/" + putRet.key;
             //封装到map中返回
-            Map<String,Object> result = new HashMap<>();
+            Map<String, Object> result = new HashMap<>();
             result.put("error", 0);
             result.put("url", url);
             return JsonUtils.objectToJson(result);
         } catch (QiniuException e) {
             e.printStackTrace();
-            Map<String,Object> result = new HashMap<>();
+            Map<String, Object> result = new HashMap<>();
             result.put("error", 1);
             result.put("message", "图片上传失败");
             return JsonUtils.objectToJson(result);
