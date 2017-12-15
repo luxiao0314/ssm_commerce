@@ -72,21 +72,7 @@ public class ItemServiceImpl implements ItemService {
         return itemCatMapper.selectByExample(example);
     }
 
-    @Override
-    public List<EasyUITreeNode> getItemCatListByParentId(long parentId) {
-        TbItemCatExample example = new TbItemCatExample();
-        example.createCriteria().andParentIdEqualTo(parentId);
-        List<TbItemCat> tbItemCats = itemCatMapper.selectByExample(example);
-        ArrayList<EasyUITreeNode> easyUITreeNodes = new ArrayList<>();
-        for (TbItemCat tbItemCat : tbItemCats) {
-            EasyUITreeNode easyUITreeNode = new EasyUITreeNode();
-            easyUITreeNode.setId(tbItemCat.getId());
-            easyUITreeNode.setText(tbItemCat.getName());
-            easyUITreeNode.setState(tbItemCat.getIsParent() ? "closed" : "open");
-            easyUITreeNodes.add(easyUITreeNode);
-        }
-        return easyUITreeNodes;
-    }
+
 
     @Override
     public EasyUIDataGridResult getItemList(int page, int rows) {
@@ -99,22 +85,6 @@ public class ItemServiceImpl implements ItemService {
         easyUIDataGridResult.setSize(pageInfo.getPageSize());
         easyUIDataGridResult.setTotal(pageInfo.getTotal());
         return easyUIDataGridResult;
-    }
-
-    @Override
-    public PageResult getCatPageList(int page, int rows) {
-        PageHelper.startPage(page, rows);
-        TbItemCatExample example = new TbItemCatExample();
-        List<TbItemCat> tbItems = itemCatMapper.selectByExample(example);
-        PageInfo<TbItemCat> pageInfo = new PageInfo<>(tbItems);
-        PageResult<TbItemCat> pageResult = new PageResult<>();
-        pageResult.setList(tbItems);
-        pageResult.setSize(pageInfo.getSize());
-        pageResult.setPageSize(pageInfo.getPageSize());
-        pageResult.setPageNum(pageInfo.getPageNum());
-        pageResult.setPages(pageInfo.getPages());
-        pageResult.setTotal(pageInfo.getTotal());
-        return pageResult;
     }
 
     @Override
