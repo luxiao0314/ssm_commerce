@@ -41,4 +41,9 @@ internal class ContentController {
         return contentService?.getContentListByCid(categoryId, page, rows)
     }
 
+    @RequestMapping(value = "/content/delete", method = arrayOf(RequestMethod.POST))
+    @ResponseBody
+    fun deleteContent(@RequestParam(name = "ids", defaultValue = "0") id: Long): E3Result? {
+        return contentService?.deleteContent(id)
+    }
 }

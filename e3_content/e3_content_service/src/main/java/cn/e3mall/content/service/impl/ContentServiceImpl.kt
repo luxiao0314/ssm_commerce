@@ -49,4 +49,11 @@ class ContentServiceImpl : ContentService {
         easyUIDataGridResult.total = pageInfo.total
         return easyUIDataGridResult
     }
+
+    override fun deleteContent(id: Long): E3Result {
+        val example = TbContentExample()
+        example.createCriteria().andIdEqualTo(id)
+        contentMapper?.deleteByExample(example)
+        return E3Result.ok()
+    }
 }

@@ -83,26 +83,4 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
         return E3Result.ok(contentCategory);
     }
 
-    @Override
-    public EasyUIDataGridResult queryContentList(long categoryId,Integer page, Integer rows) {
-        PageHelper.startPage(page, rows);
-        TbContentCategoryExample example = new TbContentCategoryExample();
-        example.createCriteria().andIdEqualTo(categoryId);
-        List<TbContentCategory> tbItems = contentCategoryMapper.selectByExample(example);
-        EasyUIDataGridResult easyUIDataGridResult = new EasyUIDataGridResult();
-        easyUIDataGridResult.setRows(tbItems);
-        PageInfo<TbContentCategory> pageInfo = new PageInfo<>(tbItems);
-        easyUIDataGridResult.setSize(pageInfo.getPageSize());
-        easyUIDataGridResult.setTotal(pageInfo.getTotal());
-        return easyUIDataGridResult;
-    }
-
-    @Override
-    public E3Result deleteContent(long id) {
-        TbContentCategoryExample example = new TbContentCategoryExample();
-        example.createCriteria().andIdEqualTo(id);
-        contentCategoryMapper.deleteByExample(example);
-        return E3Result.ok(); 
-    }
-
 }

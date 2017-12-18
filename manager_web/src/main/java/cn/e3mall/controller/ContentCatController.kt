@@ -29,10 +29,4 @@ class ContentCatController {
     fun createContentCategory(parentId: Long?, name: String): E3Result {
         return contentCategoryService!!.addContentCategory(parentId!!, name)
     }
-
-    @RequestMapping(value = "/content/delete", method = arrayOf(RequestMethod.POST))
-    @ResponseBody
-    fun deleteContent(@RequestParam(name = "ids", defaultValue = "0") id: Long): E3Result {
-        return contentCategoryService!!.deleteContent(id)
-    }
 }
