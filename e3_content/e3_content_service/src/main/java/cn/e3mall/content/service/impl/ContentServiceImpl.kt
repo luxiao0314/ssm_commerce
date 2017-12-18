@@ -31,6 +31,13 @@ class ContentServiceImpl : ContentService {
         return E3Result.ok()
     }
 
+    override fun editContent(content: TbContent): E3Result {
+        val example = TbContentExample()
+        example.createCriteria().andIdEqualTo(content.id)
+        contentMapper!!.updateByExample(content,example)
+        return E3Result.ok()
+    }
+
     override fun getContentListByCid(cid: Long): MutableList<TbContent>? {
         val example = TbContentExample()
         example.createCriteria().andCategoryIdEqualTo(cid)

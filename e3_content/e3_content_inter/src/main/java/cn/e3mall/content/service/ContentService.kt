@@ -13,7 +13,9 @@ interface ContentService {
 
     fun getContentListByCid(cid: Long): List<TbContent>?
 
-    abstract fun deleteContent(id: Long): E3Result
+    fun deleteContent(id: Long): E3Result
 
     fun getContentListByCid(cid: Long?, page: Int?, rows: Int?): EasyUIDataGridResult?
+
+    fun editContent(content: TbContent): E3Result
 }

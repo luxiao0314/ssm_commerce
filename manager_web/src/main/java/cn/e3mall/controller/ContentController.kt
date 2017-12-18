@@ -31,8 +31,14 @@ internal class ContentController {
 
     @RequestMapping(value = "/content/save", method = arrayOf(RequestMethod.POST))
     @ResponseBody
-    fun addContent(content: TbContent): E3Result {
-        return contentService!!.saveContent(content)
+    fun addContent(content: TbContent): E3Result? {
+        return contentService?.saveContent(content)
+    }
+
+    @RequestMapping(value = "/rest/content/edit", method = arrayOf(RequestMethod.POST))
+    @ResponseBody
+    fun editContent(content: TbContent): E3Result? {
+        return contentService?.editContent(content)
     }
 
     @RequestMapping("/content/query/list")
