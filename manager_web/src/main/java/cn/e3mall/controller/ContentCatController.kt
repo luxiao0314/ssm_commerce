@@ -30,12 +30,6 @@ class ContentCatController {
         return contentCategoryService!!.addContentCategory(parentId!!, name)
     }
 
-    @RequestMapping("/content/query/list")
-    @ResponseBody
-    fun queryContentList(@RequestParam(name = "categoryId", defaultValue = "0") categoryId: Int?, @RequestParam page: Int?, @RequestParam rows: Int?): EasyUIDataGridResult {
-        return contentCategoryService!!.queryContentList(categoryId!!.toLong(), page, rows)
-    }
-
     @RequestMapping(value = "/content/delete", method = arrayOf(RequestMethod.POST))
     @ResponseBody
     fun deleteContent(@RequestParam(name = "ids", defaultValue = "0") id: Long): E3Result {
