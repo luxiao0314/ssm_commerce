@@ -73,7 +73,6 @@ public class ItemServiceImpl implements ItemService {
     }
 
 
-
     @Override
     public EasyUIDataGridResult getItemList(int page, int rows) {
         PageHelper.startPage(page, rows);
@@ -125,6 +124,11 @@ public class ItemServiceImpl implements ItemService {
         });
         //返回成功
         return E3Result.ok();
+    }
+
+    @Override
+    public TbItemDesc getItemDescById(long itemId) {
+        return itemDescMapper.selectByPrimaryKey(itemId);
     }
 
 }
