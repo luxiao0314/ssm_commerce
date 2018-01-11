@@ -45,10 +45,10 @@ public class ItemServiceImpl implements ItemService {
     private TbItemMapper itemMapper;
     @Autowired
     private TbItemDescMapper itemDescMapper;
-//    @Autowired
-//    private JmsTemplate jmsTemplate;
-//    @Resource
-//    private Destination topicDestination;
+    @Autowired
+    private JmsTemplate jmsTemplate;    //发送消息
+    @Resource
+    private Destination topicDestination;   //发送目的地
 
     @Override
     public TbItem getItemById(long itemId) {
@@ -117,12 +117,12 @@ public class ItemServiceImpl implements ItemService {
         //向商品描述表插入数据
         itemDescMapper.insert(itemDesc);
         //发送商品添加消息  暂时不能添加这里,还需要配置,否则服务发布出错
-//        jmsTemplate.send(topicDestination, new MessageCreator() {
-//            @Override
-//            public Message createMessage(Session session) throws JMSException {
-//                return session.createTextMessage(itemId + "");
-//            }
-//        });
+        jmsTemplate.send(topicDestination, new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                return session.createTextMessage(itemId + "");
+            }
+        });
         //返回成功
         return E3Result.ok();
     }
