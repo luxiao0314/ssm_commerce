@@ -33,6 +33,12 @@ public class PictureController {
     @Value("${IMAGE_SERVER_URL}")
     private String IMAGE_SERVER_URL;
 
+    /**
+     * 上传图片至七牛云,采用七牛云作为图片存储服务器
+     * @param uploadFile
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/pic/upload", produces = MediaType.TEXT_PLAIN_VALUE + ";charset=utf-8")
     @ResponseBody
     public String upload(MultipartFile uploadFile) throws IOException {

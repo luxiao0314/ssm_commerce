@@ -6117,3 +6117,7 @@ org.apache.solr.client.solrj.impl.HttpSolrServer$RemoteSolrException: org.apache
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
+
+
+[INFO ] 2018-01-11 19:34:01,228 method:com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.disconnected(DubboProtocol.java:130)
+ [DUBBO] disconected from /192.168.2.235:20882,url:dubbo://192.168.2.235:20882/cn.e3mall.search.service.SearchService?anyhost=true&application=e3-search-web&check=false&codec=dubbo&dubbo=2.5.3&heartbeat=60000&interface=cn.e3mall.search.service.SearchService&methods=search&pid=7964&revision=1.0-SNAPSHOT&side=consumer&timeout=600000&timestamp=1515576603246, dubbo version: 2.5.3, current host: 192.168.2.235
