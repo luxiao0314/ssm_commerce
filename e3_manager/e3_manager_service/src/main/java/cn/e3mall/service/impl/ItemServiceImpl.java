@@ -3,8 +3,8 @@ package cn.e3mall.service.impl;
 import cn.e3mall.common.utils.E3Result;
 import cn.e3mall.common.utils.IDUtils;
 import cn.e3mall.mapper.TbItemDescMapper;
-import cn.e3mall.mapper.TbItemParamMapper;
 import cn.e3mall.pojo.*;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -44,13 +44,11 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private TbItemMapper itemMapper;
     @Autowired
-    private TbItemParamMapper itemParamMapper;
-    //    @Autowired
-//    private TbItemDescMapper itemDescMapper;
-//    @Autowired
-//    private JmsTemplate jmsTemplate;
-//    @Resource
-//    private Destination topicDestination;
+    private TbItemDescMapper itemDescMapper;
+    @Autowired
+    private JmsTemplate jmsTemplate;    //发送消息
+    @Resource
+    private Destination topicDestination;   //发送目的地
 
     @Override
     public TbItem getItemById(long itemId) {
@@ -74,21 +72,6 @@ public class ItemServiceImpl implements ItemService {
         return itemCatMapper.selectByExample(example);
     }
 
-    @Override
-    public List<EasyUITreeNode> getItemCatListByParentId(long parentId) {
-        TbItemCatExample example = new TbItemCatExample();
-        example.createCriteria().andParentIdEqualTo(parentId);
-        List<TbItemCat> tbItemCats = itemCatMapper.selectByExample(example);
-        ArrayList<EasyUITreeNode> easyUITreeNodes = new ArrayList<>();
-        for (TbItemCat tbItemCat : tbItemCats) {
-            EasyUITreeNode easyUITreeNode = new EasyUITreeNode();
-            easyUITreeNode.setId(tbItemCat.getId());
-            easyUITreeNode.setText(tbItemCat.getName());
-            easyUITreeNode.setState(tbItemCat.getIsParent()?"closed":"open");
-            easyUITreeNodes.add(easyUITreeNode);
-        }
-        return easyUITreeNodes;
-    }
 
     @Override
     public EasyUIDataGridResult getItemList(int page, int rows) {
@@ -104,22 +87,6 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public PageResult getCatPageList(int page, int rows) {
-        PageHelper.startPage(page, rows);
-        TbItemCatExample example = new TbItemCatExample();
-        List<TbItemCat> tbItems = itemCatMapper.selectByExample(example);
-        PageInfo<TbItemCat> pageInfo = new PageInfo<>(tbItems);
-        PageResult<TbItemCat> pageResult = new PageResult<>();
-        pageResult.setList(tbItems);
-        pageResult.setSize(pageInfo.getSize());
-        pageResult.setPageSize(pageInfo.getPageSize());
-        pageResult.setPageNum(pageInfo.getPageNum());
-        pageResult.setPages(pageInfo.getPages());
-        pageResult.setTotal(pageInfo.getTotal());
-        return pageResult;
-    }
-
-    @Override
     public E3Result deleteItem(long id) {
         TbItemExample example = new TbItemExample();
         example.createCriteria().andIdEqualTo(id);
@@ -127,37 +94,41 @@ public class ItemServiceImpl implements ItemService {
         return E3Result.ok();
     }
 
-//    @Override
-//    public E3Result addItem(TbItem item, String desc) {
-//        //生成商品id
-//        final long itemId = IDUtils.genItemId();
-//        //补全item的属性
-//        item.setId(itemId);
-//        //1-正常，2-下架，3-删除
-//        item.setStatus((byte) 1);
-//        item.setCreated(new Date());
-//        item.setUpdated(new Date());
-//        //向商品表插入数据
-//        itemMapper.insert(item);
-//        //创建一个商品描述表对应的pojo对象。
-//        TbItemDesc itemDesc = new TbItemDesc();
-//        //补全属性
-//        itemDesc.setItemId(itemId);
-//        itemDesc.setItemDesc(desc);
-//        itemDesc.setCreated(new Date());
-//        itemDesc.setUpdated(new Date());
-//        //向商品描述表插入数据
-//        itemDescMapper.insert(itemDesc);
-//        //发送商品添加消息
-//        jmsTemplate.send(topicDestination, new MessageCreator() {
-//
-//            @Override
-//            public Message createMessage(Session session) throws JMSException {
-//                return session.createTextMessage(itemId + "");
-//            }
-//        });
-//        //返回成功
-//        return E3Result.ok();
-//    }
+    @Override
+    public E3Result addItem(TbItem item, String desc) {
+        //生成商品id
+        final long itemId = IDUtils.genItemId();
+        //补全item的属性
+        item.setId(itemId);
+        //1-正常，2-下架，3-删除
+        item.setStatus((byte) 1);
+        item.setCreated(new Date());
+        item.setUpdated(new Date());
+        //向商品表插入数据
+        itemMapper.insert(item);
+        //创建一个商品描述表对应的pojo对象。
+        TbItemDesc itemDesc = new TbItemDesc();
+        //补全属性
+        itemDesc.setItemId(itemId);
+        itemDesc.setItemDesc(desc);
+        itemDesc.setCreated(new Date());
+        itemDesc.setUpdated(new Date());
+        //向商品描述表插入数据
+        itemDescMapper.insert(itemDesc);
+        //发送商品添加消息  暂时不能添加这里,还需要配置,否则服务发布出错
+        jmsTemplate.send(topicDestination, new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                return session.createTextMessage(itemId + "");
+            }
+        });
+        //返回成功
+        return E3Result.ok();
+    }
+
+    @Override
+    public TbItemDesc getItemDescById(long itemId) {
+        return itemDescMapper.selectByPrimaryKey(itemId);
+    }
 
 }

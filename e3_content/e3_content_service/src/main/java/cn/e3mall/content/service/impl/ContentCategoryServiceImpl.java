@@ -20,11 +20,11 @@ import cn.e3mall.pojo.TbContentCategoryExample;
 import cn.e3mall.pojo.TbContentCategoryExample.Criteria;
 
 /**
- * 内容分类管理Service
- * <p>Title: ContentCategoryServiceImpl</p>
- * <p>Description: </p>
- * <p>Company: www.itcast.cn</p>
- * @version 1.0
+ * @Description 内容分类管理Service
+ * @Author lucio
+ * @Email lucio0314@163.com
+ * @Date 16/01/2018 3:40 PM
+ * @Version 1.0.0
  */
 @Service
 public class ContentCategoryServiceImpl implements ContentCategoryService {
@@ -81,28 +81,6 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
         }
         //返回结果，返回E3Result，包含pojo
         return E3Result.ok(contentCategory);
-    }
-
-    @Override
-    public EasyUIDataGridResult queryContentList(long categoryId,Integer page, Integer rows) {
-        PageHelper.startPage(page, rows);
-        TbContentCategoryExample example = new TbContentCategoryExample();
-        example.createCriteria().andIdEqualTo(categoryId);
-        List<TbContentCategory> tbItems = contentCategoryMapper.selectByExample(example);
-        EasyUIDataGridResult easyUIDataGridResult = new EasyUIDataGridResult();
-        easyUIDataGridResult.setRows(tbItems);
-        PageInfo<TbContentCategory> pageInfo = new PageInfo<>(tbItems);
-        easyUIDataGridResult.setSize(pageInfo.getPageSize());
-        easyUIDataGridResult.setTotal(pageInfo.getTotal());
-        return easyUIDataGridResult;
-    }
-
-    @Override
-    public E3Result deleteContent(long id) {
-        TbContentCategoryExample example = new TbContentCategoryExample();
-        example.createCriteria().andIdEqualTo(id);
-        contentCategoryMapper.deleteByExample(example);
-        return E3Result.ok(); 
     }
 
 }

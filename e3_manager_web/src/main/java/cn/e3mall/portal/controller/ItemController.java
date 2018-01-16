@@ -42,23 +42,23 @@ public class ItemController {
 //        return itemService.getItemCatList();
 //    }
 
-    @RequestMapping("/item/cat/list/{pages}/{rows}")
-    @ResponseBody
-    public Msg getItemCatList(@PathVariable Integer pages, @PathVariable Integer rows) {
-        return Msg.success().add("carlist", itemService.getCatPageList(pages, rows));
-    }
-
-    /**
-     * 根据parentId查询item_cat
-     *
-     * @return
-     */
-    @RequestMapping("/item/cat/list")
-    @ResponseBody
-    public List<EasyUITreeNode> getItemCarList(@RequestParam(name = "id", defaultValue = "0") long parentId) {
-//        return Msg.success().add("carlist", itemService.getItemCatListByParentId(parentId));
-        return itemService.getItemCatListByParentId(parentId);
-    }
+//    @RequestMapping("/item/cat/list/{pages}/{rows}")
+//    @ResponseBody
+//    public Msg getItemCatList(@PathVariable Integer pages, @PathVariable Integer rows) {
+//        return Msg.success().add("carlist", itemService.getCatPageList(pages, rows));
+//    }
+//
+//    /**
+//     * 根据parentId查询item_cat
+//     *
+//     * @return
+//     */
+//    @RequestMapping("/item/cat/list")
+//    @ResponseBody
+//    public List<EasyUITreeNode> getItemCarList(@RequestParam(name = "id", defaultValue = "0") long parentId) {
+////        return Msg.success().add("carlist", itemService.getItemCatListByParentId(parentId));
+//        return itemService.getItemCatListByParentId(parentId);
+//    }
 
     /**
      * 分页查找 http://localhost:8081/item/tblist/1/20

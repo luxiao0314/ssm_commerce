@@ -35,15 +35,15 @@ public class ContentCatController {
         return contentCategoryService.addContentCategory(parentId, name);
     }
 
-    @RequestMapping("/content/query/list")
-    @ResponseBody
-    public EasyUIDataGridResult queryContentList(@RequestParam(name = "categoryId", defaultValue = "0") Integer categoryId, @RequestParam Integer page, @RequestParam Integer rows) {
-        return contentCategoryService.queryContentList(categoryId, page, rows);
-    }
+//    @RequestMapping("/content/query/list")
+//    @ResponseBody
+//    public EasyUIDataGridResult queryContentList(@RequestParam(name = "categoryId", defaultValue = "0") Integer categoryId, @RequestParam Integer page, @RequestParam Integer rows) {
+//        return contentCategoryService.queryContentList(categoryId, page, rows);
+//    }
 
-    @RequestMapping(value = "/content/delete", method = RequestMethod.POST)
-    @ResponseBody
-    public E3Result deleteContent(@RequestParam(name = "ids", defaultValue = "0") long id) {
-        return contentCategoryService.deleteContent(id);
-    }
+//    @RequestMapping(value = "/content/delete", method = RequestMethod.POST)
+//    @ResponseBody
+//    public E3Result deleteContent(@RequestParam(name = "ids", defaultValue = "0") long id) {
+//        return contentCategoryService.deleteContent(id);
+//    }
 }
