@@ -20,11 +20,11 @@ import cn.e3mall.pojo.TbContentCategoryExample;
 import cn.e3mall.pojo.TbContentCategoryExample.Criteria;
 
 /**
- * 内容分类管理Service
- * <p>Title: ContentCategoryServiceImpl</p>
- * <p>Description: </p>
- * <p>Company: www.itcast.cn</p>
- * @version 1.0
+ * @Description 内容分类管理Service
+ * @Author lucio
+ * @Email lucio0314@163.com
+ * @Date 16/01/2018 3:40 PM
+ * @Version 1.0.0
  */
 @Service
 public class ContentCategoryServiceImpl implements ContentCategoryService {
